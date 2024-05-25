@@ -11,6 +11,7 @@ cd "$CROSS_DIR"
 
 if [[ -n $VERSION ]] && ! [[ $VERSION =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     cargo install cross --git https://github.com/cross-rs/cross --rev "$VERSION" --force
+    cargo install cargo-deb
     mv "$HOME/.cargo/bin/cross" .
     CROSS_NO_WARNINGS=0 ./cross --version
     exit 0
