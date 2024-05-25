@@ -1,4 +1,4 @@
-name: "Build Rust Projects with Cross"
+name: "Build or package Deb Rust Projects with Cross"
 author: "Dave Rolsky <autarch@urth.org>"
 branding:
   icon: home
