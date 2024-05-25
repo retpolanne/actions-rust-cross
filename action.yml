@@ -11,7 +11,7 @@ inputs:
     default: "."
   command:
     description: |
-      The commands to run (one of "build", "test", or "both").
+      The commands to run (one of "build", "deb", test", or "both").
     default: build
   target:
     description: The target platform
@@ -109,6 +109,12 @@ runs:
       run: |
         ${{ steps.set-build-command.outputs.build-command }} +${{inputs.toolchain}} build ${{ inputs.args }} --target ${{ inputs.target }}
       if: ${{ inputs.command != 'test' && runner.os != 'Windows' }}
+    - name: Deb binary (*nix)
+      working-directory: ${{ inputs.working-directory }}
+      shell: bash
+      run: |
+        ${{ steps.set-build-command.outputs.build-command }} +${{inputs.toolchain}} deb ${{ inputs.args }} --target ${{ inputs.target }}
+      if: ${{ inputs.command == 'deb' && runner.os != 'Windows' }}
     - name: Build binary (Windows)
       working-directory: ${{ inputs.working-directory }}
       shell: powershell
